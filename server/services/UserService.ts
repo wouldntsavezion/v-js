@@ -4,8 +4,8 @@ import decrypt from "../auth/decrypt";
 import g from "../utils/guard";
 
 export async function authenticate(username:string, password:string): Promise<boolean> {
-	g(username !== "", "No username provided to `authenticate` method.");
-	g(password !== "", "No password provided to `authenticate` method.");
+	g(!!username, "No username provided to `authenticate` method.");
+	g(!!password, "No password provided to `authenticate` method.");
 
 	let auth = false;
 	await k
