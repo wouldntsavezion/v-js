@@ -16,6 +16,7 @@ exports.up = function(knex) {
 		table.integer("id_bookstore").references("bookstores.id");
 		table.integer("id_book").references("books.id");
 		table.integer("quantity").notNullable().defaultTo(0);
+		table.enu("status", ["BOOKSTORE_BOOK_STATUS_IN_STOCK", "BOOKSTORE_BOOK_STATUS_OUT_OF_STOCK"]).defaultTo("BOOKSTORE_BOOK_STATUS_OUT_OF_STOCK");
 	});
 };
 
