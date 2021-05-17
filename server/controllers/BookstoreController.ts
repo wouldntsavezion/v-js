@@ -16,10 +16,10 @@ export default class BookstoreController {
 			}
 		}
 
-		let bookid = parseInt(req.query.bookid as string);
-		let storeid = req.query.storeid ? parseInt(req.query.storeid as string) : null;
+		const bookid = parseInt(req.query.bookid as string);
+		const storeid = req.query.storeid ? parseInt(req.query.storeid as string) : null;
 
-		let book = storeid ? await service.fetch(bookid, storeid) : await service.fetch(bookid);
+		const book = storeid ? await service.fetch(bookid, storeid) : await service.fetch(bookid);
 
 		res.send(JSON.stringify(book));
 	}
@@ -51,11 +51,46 @@ export default class BookstoreController {
 		res.status(success ? 201 : 409).end();
 	}
 
-	public static update(req:express.Request, res:express.Response) {
-		res.send("fetch")
+	public static async update(req:express.Request, res:express.Response) {
+		try {
+			g([
+				[!!req.body.bookid, "No bookid provided to `update` route."],
+				[!!req.body.storeid, "No storeid provided to `update` route."],
+				[!!req.body.quantity, "No quantity provided to `update` route."],
+			]);
+		} catch (e) {
+			if(e instanceof GuardError) {
+				res.send(e.message);
+				res.status(400).end();
+				return false;
+			}
+		}
+
+		const [bookid, storeid, quantity] = [
+			parseInt(req.body.bookid),
+			parseInt(req.body.storeid),
+			parseInt(req.body.quantity),
+		];
+		const success = await service.update(bookid, storeid, quantity);
+
+		res.status(success ? 200 : 500).end();
 	}
 
-	public static delete(req:express.Request, res:express.Response) {
-		res.send("fetch")
+	public static async delete(req:express.Request, res:express.Response) {
+		try {
+			g([
+				[!!req.body.bookid, "No bookid provided to `delete` route."],
+			]);
+		} catch (e) {
+			if(e instanceof GuardError) {
+				res.send(e.message);
+				res.status(400).end();
+				return false;
+			}
+		}
+
+		const bookid = parseInt(req.body.bookid)
+		const success = await service.del(bookid);
+		res.status(success ? 200 : 404).end();
 	}
 }
