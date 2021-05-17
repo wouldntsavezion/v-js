@@ -16,7 +16,7 @@ const registerRoutes = (router: express.Router, routes: route[]): void => {
 				router.get(route.path, route.handler);
 				break;
 			
-			default:
+			case "POST":
 				router.post(route.path, route.handler);
 				break;
 		}
