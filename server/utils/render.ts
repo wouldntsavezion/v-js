@@ -4,7 +4,7 @@ import escaperegex from "./escaperegex";
 
 const md = require('markdown-it')();
 
-// Very good templating engine 10/10 no edit needed
+// Very good templating engine 10/10 no edit needed 👌
 export default (template:string, data:object = {}, markdown: boolean = false) => {
 	try {
 		let header = fs.readFileSync(path.resolve(__dirname, "../templates/header.html"), 'utf8');
