@@ -13,8 +13,8 @@ exports.up = function(knex) {
 		table.string("location").notNullable();
 	})
 	.createTable("bookstore_books", function(table) {
-		table.integer("id_bookstore").references("bookstores.id");
-		table.integer("id_book").references("books.id");
+		table.integer("id_bookstore").references("bookstores.id").onDelete("cascade");
+		table.integer("id_book").references("books.id").onDelete("cascade");
 		table.integer("quantity").notNullable().defaultTo(0);
 		table.enu("status", ["BOOKSTORE_BOOK_STATUS_IN_STOCK", "BOOKSTORE_BOOK_STATUS_OUT_OF_STOCK"]).defaultTo("BOOKSTORE_BOOK_STATUS_OUT_OF_STOCK");
 	});
@@ -22,9 +22,9 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
 	return knex.schema
+		.dropTable("bookstore_books")
 		.dropTable("books")
-		.dropTable("bookstores")
-		.dropTable("bookstore_books");
+		.dropTable("bookstores");
 };
 
 exports.config = { transaction: false };

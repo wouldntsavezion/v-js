@@ -15,8 +15,9 @@ export async function fetch(bookid: number, storeid?:number) : Promise<Pick<Book
 
 	if(storeid) q
 		.join("bookstore_books", "books.id", "=", "bookstore_books.id_book")
+		.join("bookstores", "bookstore_books.id_bookstore", "=", "bookstores.id")
 		.andWhere("bookstore_books.id_bookstore", "=", storeid)
-		.first("books.id", "books.isbn", "books.name", "books.author", "books.date", "bookstore_books.quantity", "bookstore_books.status");
+		.first("books.id", "books.isbn", "books.name", "books.author", "books.date", "bookstore_books.quantity", "bookstore_books.status", "bookstores.name as storename");
 	else q
 		.first("books.id", "books.isbn", "books.name", "books.author", "books.date");
 

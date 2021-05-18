@@ -2,6 +2,7 @@ import express from "express";
 import render from "../utils/render";
 import g, { t, GuardError } from "../utils/guard";
 import * as service from "../services/BookstoreService";
+import { BookstoreBookStatus } from "../models/BookstoreBook";
 
 export default class WebsiteController {
 	public static home(req:express.Request, res:express.Response) {
@@ -27,7 +28,11 @@ export default class WebsiteController {
 
 		const book = storeid ? await service.fetch(bookid, storeid) : await service.fetch(bookid);
 
-		if(book)
+		if(book && storeid && book.status == BookstoreBookStatus.IN_STOCK)
+			res.send(render("bookinstore", book));
+		else if(book && storeid && book.status == BookstoreBookStatus.OUT_OF_STOCK)
+			res.send(render("booknotinstore", book));
+		else if(book) 
 			res.send(render("book", book));
 		else if (storeid) 
 			res.send(render("notfoundinstore", {bookid: bookid, storeid: storeid}));
