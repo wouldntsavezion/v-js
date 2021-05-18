@@ -1,6 +1,7 @@
 import express from "express";
 import g, { GuardError } from "../utils/guard";
 import * as service from "../services/BookstoreService";
+import render from "../utils/render";
 
 export default class BookstoreController {
 	public static async fetch(req:express.Request, res:express.Response) {
@@ -20,8 +21,8 @@ export default class BookstoreController {
 		const storeid = req.query.storeid ? parseInt(req.query.storeid as string) : null;
 
 		const book = storeid ? await service.fetch(bookid, storeid) : await service.fetch(bookid);
-
-		res.send(JSON.stringify(book));
+		
+		res.send(render("book"));
 	}
 
 	public static async create(req:express.Request, res:express.Response) {

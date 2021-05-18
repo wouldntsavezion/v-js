@@ -1,0 +1,1 @@
+export default ():string => { return new Date().toLocaleString("en-US").split(", ")[1] }

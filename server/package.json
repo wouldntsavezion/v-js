@@ -9,7 +9,8 @@
     "test": "jest",
     "update-db": "knex migrate:latest",
     "rollback-db": "knex migrate:rollback --all",
-    "seed-db": "knex seed:run"
+    "seed-db": "knex seed:run",
+    "tasks": "nodemon tasks.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,8 @@
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "knex": "^0.95.5",
+    "markdown-it": "^12.0.6",
+    "node-schedule": "^2.0.0",
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
