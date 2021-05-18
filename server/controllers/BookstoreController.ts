@@ -21,8 +21,10 @@ export default class BookstoreController {
 		const storeid = req.query.storeid ? parseInt(req.query.storeid as string) : null;
 
 		const book = storeid ? await service.fetch(bookid, storeid) : await service.fetch(bookid);
-		
-		res.send(render("book"));
+
+		if(book)
+			res.send(JSON.stringify(book));
+		else res.status(404).end();
 	}
 
 	public static async create(req:express.Request, res:express.Response) {

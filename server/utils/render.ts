@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import escaperegex from "./escaperegex";
 
 const md = require('markdown-it')();
 
@@ -16,9 +17,9 @@ export default (template:string, data:object = {}, markdown: boolean = false) =>
 
 		if(data) {
 			for (const [key, value] of Object.entries(data)) {
-				header = header.replace("${" + key + "}", value);
-				output = output.replace("${" + key + "}", value);
-				footer = footer.replace("${" + key + "}", value);
+				header = header.replace(new RegExp(escaperegex("${" + key + "}"), "g"), value);
+				output = output.replace(new RegExp(escaperegex("${" + key + "}"), "g"), value);
+				footer = footer.replace(new RegExp(escaperegex("${" + key + "}"), "g"), value);
 			}
 		}
 		return header + output + footer;

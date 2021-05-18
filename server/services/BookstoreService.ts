@@ -22,6 +22,14 @@ export async function fetch(bookid: number, storeid?:number) : Promise<Pick<Book
 
 	await q
 		.then((row:typeof book) => {
+			try {
+				g([
+					[!!row, storeid ? "Couldn't find book " + bookid + " in store " + storeid : "Couldn't find book " + bookid],
+				]);
+			} catch (e) {
+				return null;
+			}
+
 			book = row;
 		})
 		.catch((e:Error) => {
