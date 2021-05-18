@@ -10,8 +10,8 @@ export default class WebsiteController {
 	}
 
 	public static async book(req:express.Request, res:express.Response) {
-		const bookid = parseInt(req.params.book as string);
-		const storeid = req.params.store ? parseInt(req.params.store as string) : null;
+		const bookid = parseInt(req.query.bookid as string);
+		const storeid = req.query.storeid ? parseInt(req.query.storeid as string) : null;
 
 		let guard:t[] = [[!!bookid, "Invalid bookid provided to `book` route."]]
 		if(storeid) guard.push([!!storeid, "Invalid storeid provided to `book` route."]);

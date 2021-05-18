@@ -24,7 +24,7 @@ const registerRoutes = (router: express.Router, routes: route[]): void => {
 }
 
 const WebsiteRoutes:route[] = [
-	{ path: '/book/:book/:store?', method: "GET", handler: (req, res) => WebsiteController.book(req, res) },
+	{ path: '/book/', method: "GET", handler: (req, res) => WebsiteController.book(req, res) },
 	{ path: '/', method: "GET", handler: (req, res) => WebsiteController.home(req, res) },
 ]
 
