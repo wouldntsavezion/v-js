@@ -1,5 +1,19 @@
 # v-js
-Run `npm start` in `/server`
+
+## npm scripts
+
+To setup the DB :
+  * Run `update-db` in `/server`
+  * Run `seed-db` in `/server`
+
+To start the server : 
+  * Run `start` in `/server`
+
+To start the jobs :
+  * Run `tasks` in `/server`
+
+To run the tests :
+  * Run `tests` in `/server`
 
 ## Routes
 There are some static routes that will return proper html
@@ -41,3 +55,11 @@ This will insert or update a bookstore_book entry in the DB, all the data is req
 `{bookid: int}`
 
 This will delete a book in the DB.
+
+## Comments
+
+* I though I'd install React at some point but the "front-end" was actually put up together pretty quickly in a terribly hacky way and I might've actually saved some time with React in the end.
+
+* It was the first time I used MOST of what is used in this project and I spent a TON of hours just learning everything and making sure I used it all as properly as I could.
+
+* I spent a lot more hours than I thought I would on this (~30h)
