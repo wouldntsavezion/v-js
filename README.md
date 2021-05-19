@@ -58,7 +58,7 @@ This will delete a book in the DB.
 
 ## Comments
 
-* I though I'd install React at some point but the "front-end" was actually put up together pretty quickly in a terribly hacky way and I might've actually saved some time with React in the end.
+* I though5 I'd install React at some point but the "front-end" was actually put up together pretty quickly in a terribly hacky way and I might've actually saved some time with React in the end.
 
 * It was the first time I used MOST of what is used in this project and I spent a TON of hours just learning everything and making sure I used it all as properly as I could.
 
