@@ -20,7 +20,6 @@ export default class WebsiteController {
 			g(guard);
 		} catch (e) {
 			if(e instanceof GuardError) {
-				res.send(e.message);
 				res.status(400).end();
 				return false;
 			}

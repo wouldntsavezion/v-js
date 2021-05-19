@@ -6,11 +6,11 @@
   "scripts": {
     "start": "nodemon index.ts",
     "build": "tsc -p ./",
-    "test": "jest",
     "update-db": "knex migrate:latest",
     "rollback-db": "knex migrate:rollback --all",
     "seed-db": "knex seed:run",
-    "tasks": "nodemon tasks.ts"
+    "tasks": "nodemon tasks.ts",
+    "test": "jest -i --watch"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +29,7 @@
     "@types/node": "^15.3.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
+    "supertest": "^6.1.3",
     "ts-jest": "^26.5.6",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"

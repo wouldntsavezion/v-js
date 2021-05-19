@@ -11,7 +11,6 @@ export default class BookstoreController {
 			]);
 		} catch (e) {
 			if(e instanceof GuardError) {
-				res.send(e.message);
 				res.status(400).end();
 				return false;
 			}
@@ -38,7 +37,6 @@ export default class BookstoreController {
 			]);
 		} catch (e) {
 			if(e instanceof GuardError) {
-				res.send(e.message);
 				res.status(400).end();
 				return false;
 			}
@@ -55,44 +53,44 @@ export default class BookstoreController {
 	}
 
 	public static async update(req:express.Request, res:express.Response) {
-		try {
-			g([
-				[!!req.body.bookid, "No bookid provided to `update` route."],
-				[!!req.body.storeid, "No storeid provided to `update` route."],
-				[!!req.body.quantity, "No quantity provided to `update` route."],
-			]);
-		} catch (e) {
-			if(e instanceof GuardError) {
-				res.send(e.message);
-				res.status(400).end();
-				return false;
-			}
-		}
-
 		const [bookid, storeid, quantity] = [
 			parseInt(req.body.bookid),
 			parseInt(req.body.storeid),
 			parseInt(req.body.quantity),
 		];
+
+		try {
+			g([
+				[typeof bookid === "number", "No bookid provided to `update` route."],
+				[typeof storeid === "number", "No storeid provided to `update` route."],
+				[typeof quantity === "number", "No quantity provided to `update` route."],
+			]);
+		} catch (e) {
+			if(e instanceof GuardError) {
+				res.status(400).end();
+				return false;
+			}
+		}
+
 		const success = await service.update(bookid, storeid, quantity);
 
 		res.status(success ? 200 : 500).end();
 	}
 
 	public static async delete(req:express.Request, res:express.Response) {
+		const bookid = parseInt(req.body.bookid)
+
 		try {
 			g([
-				[!!req.body.bookid, "No bookid provided to `delete` route."],
+				[typeof bookid === "number", "No bookid provided to `delete` route."],
 			]);
 		} catch (e) {
 			if(e instanceof GuardError) {
-				res.send(e.message);
 				res.status(400).end();
 				return false;
 			}
 		}
-
-		const bookid = parseInt(req.body.bookid)
+		
 		const success = await service.del(bookid);
 		res.status(success ? 200 : 404).end();
 	}
